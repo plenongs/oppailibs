@@ -28,6 +28,7 @@ fi
 mv /root/oppailibs/files/menu.sh /usr/bin/oppai
 mv /root/oppailibs/menu/* /etc/oppailibs/menu
 mv /root/oppailibs/files/exp-cron.sh /usr/bin/expuser
+cp /root/oppailibs/oppai.txt /etc/oppailibs/oppai.txt
 chmod -R 755 /etc/oppailibs
 chmod 700 /usr/bin/oppai
 chmod 700 /usr/bin/expuser
