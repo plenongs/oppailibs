@@ -7,6 +7,10 @@ BINARY_ARCH=""
 DOMAIN=`cat /etc/oppailibs/oppai.txt | grep 'DOMAIN ' | sed -e 's/DOMAIN //g'`
 
 echo -e "Downloading lastest noobzvpns and installing.."
+
+curl -sL $nobz -o noobz.zip
+unzip -q noobz.zip && rm -rf noobz.zip
+
 case $MACHINE in
     "x86_64")
         BINARY_ARCH="noobzvpns.x86_64"

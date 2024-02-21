@@ -19,7 +19,7 @@ DOMAIN=`cat /root/oppailibs/oppai.txt | grep 'DOMAIN ' | sed -e 's/DOMAIN //g'`
 echo -e "Domain: $DOMAIN"
 read -rp "Domain sudah benar (y/n)? " domainask
 
-if [ "$domainask" != "y" ]; then
+if [[ "$domainask" != "y" ]]; then
 echo "Silakan ganti domain di /root/oppailibs/oppai.txt"
 exit
 fi
@@ -53,8 +53,8 @@ chmod +x files/install-noobzvpns.sh && ./files/install-noobzvpns.sh
 chmod +x files/install-bbr.sh && ./files/install-bbr.sh
 
 ### GANTI NGINX.CONF & RUBAH DEFAULT NGINX.CONF KE .BAK
-read -r "Ganti nginx.conf ? " takon
-if [ "$takon" == "y"]; then
+read -rp "Ganti nginx conf (y/n)? " takon
+if [[ "$takon" == "y" ]]; then
 
 mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 cat > /etc/nginx/nginx.conf << END

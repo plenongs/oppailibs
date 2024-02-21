@@ -77,29 +77,29 @@ echo -e "  Sertifikat exp : $EXPDAT"
 echo -e "╘════════════════════════════════════════════╛"
 echo -e " "
 
-XRAY=$(systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-NOOBX=$(systemctl status noobzvpns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-NGINXS=$(systemctl status noobzvpns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+XRAY=`systemctl status xray | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1`
+NOOBX=`systemctl status noobzvpns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1`
+NGINXS=`systemctl status noobzvpns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1`
 
-if [[ $XRAY == "running"]];then
+if [[ $XRAY == "running" ]]; then
 XRAY_STATUS="ON"
 else
 XRAY_STATUS="OFF"
 fi
 
-if [[ $NOOBX == "running"]];then
+if [[ $NOOBX == "running" ]]; then
 NOOBX_STATUS="ON"
 else
 NOOBX_STATUS="OFF"
 fi
 
-if [[ $NGINXS == "running"]];then
+if [[ $NGINXS == "running" ]]; then
 NGINXS_STATUS="ON"
 else
 NGINXS_STATUS="OFF"
 fi
 
-if [ -z `noobzvpns --info-all-user | grep "Total User"` ];then
+if [ -z `noobzvpns --info-all-user | grep "Total User"` ]; then
 NOOBUSER=0
 else
 NOOBUSER=`noobzvpns --info-all-user | grep "Total User" | sed 's/Total User(s): //g'`
