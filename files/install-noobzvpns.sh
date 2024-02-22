@@ -56,7 +56,7 @@ server {
 
   index index.nginx-debian.html;
 
-  server_name oppai.${DOMAIN};
+  server_name noobz.${DOMAIN};
   location / {
     if (\$http_upgrade != "websocket") {
       return 404;
@@ -87,7 +87,7 @@ server {
 
   index index.nginx-debian.html;
 
-  server_name oppai.${DOMAIN};
+  server_name noobz.${DOMAIN};
   location / {
     if (\$http_upgrade != "websocket") {
       return 404;

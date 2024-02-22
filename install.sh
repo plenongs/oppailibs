@@ -34,7 +34,7 @@ chmod 700 /usr/bin/oppai
 chmod 700 /usr/bin/expuser
 
 ## MEMBUAT SERTIFIKAT SSL DENGAN CERTBOT
-certbot certonly --standalone --preferred-challenges http --agree-tos --email lasttrying001@gmail.com -d oppai.$DOMAIN -d v2ray.$DOMAIN --cert-name oppailibs
+certbot certonly --standalone --preferred-challenges http --agree-tos --email lasttrying001@gmail.com -d noobz.$DOMAIN -d v2ray.$DOMAIN --cert-name oppailibs
 cp /etc/letsencrypt/live/oppailibs/fullchain.pem /usr/local/etc/oppailibs/fullchain.pem
 cp /etc/letsencrypt/live/oppailibs/privkey.pem /usr/local/etc/oppailibs/privkey.pem
 

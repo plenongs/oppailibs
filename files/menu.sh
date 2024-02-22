@@ -26,7 +26,7 @@ NOOBZVPNS_CREATE(){
     if [ "$EXPD" != "" ]; then
       noobzvpns --expired-user $USERNAME $EXPD > /dev/null
     fi
-    echo -e "[USER INFO]\nUsername: $USERNAME\nPasword: $PASSWORD\nPort: 443(TLS) / 80(PLAIN)\nExpired: $EXPD (Hari)\nServer: oppai.$DOMAIN"
+    echo -e "[USER INFO]\nUsername: $USERNAME\nPasword: $PASSWORD\nPort: 443(TLS) / 80(PLAIN)\nExpired: $EXPD (Hari)\nServer: noobz.$DOMAIN"
   else
     echo -e "[ERROR] User sudah ada"
   fi 
