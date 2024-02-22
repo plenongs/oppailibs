@@ -38,7 +38,7 @@ echo -e "   [4] Hapus Akun Trojan"
 echo -e "   [5] Kembali ke Menu"
 echo -e "╘════════════════════════════════════════════╛"
 echo -e " "
-read -rp "[*] Input Number: " inputx
+read -rp " Select menu: " inputx
 
 case $inputx in
 0)

@@ -128,7 +128,7 @@ echo -e "   [3] Create Vless       | [8] Delete Account"
 echo -e "   [4] Create Noobzvpns   | [9] Autoreboot Setting"
 echo -e "╘════════════════════════════════════════════╛"
 echo -e " "
-read -r "[*] Input Number: " nmenu
+read -rp " Select menu: " nmenu
 
 case $nmenu in 
 0)
