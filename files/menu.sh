@@ -9,6 +9,7 @@ cat <<"EOF"
        |_|   |_|                              
 EOF
 
+echo -e "[..] Mohon tunngu sedang memprosses data..."
 RESTART_ALLSERVICE(){
   systemctl daemon-reload
   systemctl restart noobzvpns.service
@@ -58,6 +59,7 @@ SER_ST="Active"
 else
 SER_ST="NonActive"
 fi
+echo -e "\033[1A\033[K"
 echo -e "╒════════════════════════════════════════════╕"
 echo -e "                 TUNNEL MENU                "
 echo -e "╘════════════════════════════════════════════╛"
@@ -123,7 +125,7 @@ echo -e "   [0] Exit Script        | [5] Clear Cache"
 echo -e "   [1] Create Vmess       | [6] Restart All Service"
 echo -e "   [2] Create Trojan      | [7] Renew Sertifikat"
 echo -e "   [3] Create Vless       | [8] Delete Account"
-echo -e "   [4] Create Noobzvpns   | [9] Autoreboot Status"
+echo -e "   [4] Create Noobzvpns   | [9] Autoreboot Setting"
 echo -e "╘════════════════════════════════════════════╛"
 echo -e " "
 read -r "[*] Input Number: " nmenu
@@ -154,9 +156,9 @@ RESTART_ALLSERVICE
 echo -e "Comming next.."
 ;;
 8)
-cho -e "next.."
+bash /etc/oppailibs/menu/del-akun.sh
 ;;
 9)
-echo -e "Next.."
+bash /etc/oppailibs/menu/autoreboot.sh
 ;;
 esac
