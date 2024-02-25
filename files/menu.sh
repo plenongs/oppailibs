@@ -22,7 +22,8 @@ NOOBZVPNS_CREATE(){
   read -p "Username : " USERNAME
   read -p "Password : " PASSWORD
   read -p "Expired(Hari) : " EXPD
-  if noobzvpns --add-user $USERNAME $PASSWORD | grep -i "INFO" > /dev/null; then
+  CRNOOB=`noobzvpns --add-user $USERNAME $PASSWORD | grep -i "INFO"`
+  if [ ! -z "$CRNOOB" ]; then
     if [ "$EXPD" != "" ]; then
       noobzvpns --expired-user $USERNAME $EXPD > /dev/null
     fi
@@ -101,12 +102,12 @@ else
 NGINXS_STATUS="OFF"
 fi
 
-if [ -z `noobzvpns --info-all-user | grep "Total User"` ]; then
+NOOBC=`noobzvpns --info-all-user | grep "Total User"`
+if [ -z "$NOOBC" ]; then
 NOOBUSER=0
 else
 NOOBUSER=`noobzvpns --info-all-user | grep "Total User" | sed 's/Total User(s): //g'`
 fi
-
 VMUSER=`cat /etc/xray/config.json | grep '^###' | cut -d ' ' -f 2 | wc -l`
 VLUSER=`cat /etc/xray/config.json | grep '^#&' | cut -d ' ' -f 2 | wc -l`
 TRUSER=`cat /etc/xray/config.json | grep '^#!' | cut -d ' ' -f 2 | wc -l`

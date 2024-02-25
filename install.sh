@@ -6,29 +6,29 @@ mkdir -p /etc/oppailibs/menu
 mkdir -p /usr/local/etc/oppailibs
 
 apt install socat dnsutils curl nginx unzip -y
-apt install certbot -y
+apt install certbot netfilter-persistent -y
 systemctl stop nginx
 
 
 #DOMAIN SERVER SETTING
-#PASTIKAN DOMAIN SUDAH MEMILIKI SUBDOMAIN YANG SUDAH TERPOINTING KE VPS
-#SUBDOMAIN 1: v2ray.domainkamu.op (XRAY)
-#SUBDOMAIN 2: noobz.domainkamu.op (NOOBZVPNS)
 
-DOMAIN=`cat /root/oppailibs/oppai.txt | grep 'DOMAIN ' | sed -e 's/DOMAIN //g'`
-echo -e "Domain: $DOMAIN"
-read -rp "Domain sudah benar (y/n)? " domainask
+echo -e "PASTIKAN DOMAIN SUDAH MEMILIKI SUBDOMAIN YANG SUDAH TERPOINTING KE VPS"
+echo -e "SUBDOMAIN 1: v2ray.domainkamu.op (XRAY)"
+echo -e "SUBDOMAIN 2: noobz.domainkamu.op (NOOBZVPNS)"
+echo -e "JIKA BELUM KOSONGKAN INPUT DOMAIN UNTUK EXIT SCRIPT..\n"
+read -rp "Domain:" DOMAIN
 
-if [[ "$domainask" != "y" ]]; then
-echo "Silakan ganti domain di /root/oppailibs/oppai.txt"
+if [ -z "$DOMAIN" ]; then
+echo "byee byee......"
 exit
 fi
 
+echo "DOMAIN $DOMAIN" > /etc/oppailibs/oppai.txt
 #COPPYING FILE AND MENU
 mv /root/oppailibs/files/menu.sh /usr/bin/oppai
 mv /root/oppailibs/menu/* /etc/oppailibs/menu
 mv /root/oppailibs/files/exp-cron.sh /usr/bin/expuser
-cp /root/oppailibs/oppai.txt /etc/oppailibs/oppai.txt
+
 chmod -R 755 /etc/oppailibs
 chmod 700 /usr/bin/oppai
 chmod 700 /usr/bin/expuser
@@ -119,6 +119,27 @@ echo -e "NGINX.CONF: USER"
 else
 echo -e "NGINX.CONF: DEFAULT"
 fi
+
+read -rp "Blocking Torrent(y/n)? " btrn
+
+if [[ "$btrn" == "y"]]; then
+iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
+iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
+iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "BitTorrent protocol" -j DROP
+iptables -A FORWARD -m string --algo bm --string "peer_id=" -j DROP
+iptables -A FORWARD -m string --algo bm --string ".torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce.php?passkey=" -j DROP
+iptables -A FORWARD -m string --algo bm --string "torrent" -j DROP
+iptables -A FORWARD -m string --algo bm --string "announce" -j DROP
+iptables -A FORWARD -m string --algo bm --string "info_hash" -j DROP
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save
+netfilter-persistent reload
+echo -e "Iptables Block Torrent di tambahkan.."
+fi 
 
 ### CRONJOB EXP USER
 cat > /etc/cron.d/exp_user <<-END
