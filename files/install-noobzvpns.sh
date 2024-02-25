@@ -6,7 +6,7 @@ MACHINE=`$(which uname) "-m"`
 BINARY_ARCH=""
 DOMAIN=`cat /etc/oppailibs/oppai.txt | grep 'DOMAIN ' | sed -e 's/DOMAIN //g'`
 
-echo -e "Downloading lastest noobzvpns and installing.."
+echo -e "  Downloading lastest noobzvpns and installing.."
 
 curl -sL $nobz -o noobz.zip
 unzip -q noobz.zip && rm -rf noobz.zip
@@ -16,7 +16,7 @@ case $MACHINE in
         BINARY_ARCH="noobzvpns.x86_64"
         ;;
     *)
-        echo "Error at installation, unsuported cpu-arch $MACHINE"
+        echo "  Error at installation, unsuported cpu-arch $MACHINE"
         exit 1
         ;;
 esac
@@ -46,7 +46,7 @@ chmod 700 /usr/bin/noobzvpns
 chmod 600 /etc/noobzvpns/config.json
 chmod 600 /etc/systemd/system/noobzvpns.service
 
-echo -e "Configurasi Nginx config Noobzvpns"
+echo -e "  Configurasi Nginx config Noobzvpns"
 
 cat >/etc/nginx/conf.d/noobz.conf << END
 server {

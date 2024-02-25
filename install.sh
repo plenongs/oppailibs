@@ -12,11 +12,11 @@ systemctl stop nginx
 
 #DOMAIN SERVER SETTING
 
-echo -e "PASTIKAN DOMAIN SUDAH MEMILIKI SUBDOMAIN YANG SUDAH TERPOINTING KE VPS"
+echo -e "\n\nPASTIKAN DOMAIN SUDAH MEMILIKI SUBDOMAIN YANG SUDAH TERPOINTING KE VPS"
 echo -e "SUBDOMAIN 1: v2ray.domainkamu.op (XRAY)"
 echo -e "SUBDOMAIN 2: noobz.domainkamu.op (NOOBZVPNS)"
 echo -e "JIKA BELUM KOSONGKAN INPUT DOMAIN UNTUK EXIT SCRIPT..\n"
-read -rp "Domain:" DOMAIN
+read -rp "Domain: " DOMAIN
 
 if [ -z "$DOMAIN" ]; then
 echo "byee byee......"
@@ -42,7 +42,7 @@ chown root:root /usr/local/etc/oppailibs/fullchain.pem
 chown root:root /usr/local/etc/oppailibs/privkey.pem
 
 if [[ ! -f /usr/local/etc/oppailibs/fullchain.pem && ! -f /usr/local/etc/oppailibs/privkey.pem ]];then
-echo -e "Gagal membuat sertifikat..."
+echo -e "  Gagal membuat sertifikat..."
 exit
 fi
 
@@ -115,14 +115,14 @@ http {
   add_header Strict-Transport-Security "max-age=999999999; includeSubDomains; preload";
 }
 END
-echo -e "NGINX.CONF: USER"
+echo -e "  NGINX.CONF: USER"
 else
-echo -e "NGINX.CONF: DEFAULT"
+echo -e "  NGINX.CONF: DEFAULT"
 fi
 
 read -rp "Blocking Torrent(y/n)? " btrn
 
-if [[ "$btrn" == "y"]]; then
+if [[ "$btrn" == "y" ]]; then
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
 iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
 iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
@@ -138,7 +138,7 @@ iptables-save > /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
-echo -e "Iptables Block Torrent di tambahkan.."
+echo -e "  Iptables Block Torrent di tambahkan.."
 fi 
 
 ### CRONJOB EXP USER

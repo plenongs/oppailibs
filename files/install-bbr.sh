@@ -15,9 +15,9 @@ Check_And_Add_Line(){
 }
 
 Install_BBR(){
-echo "Installing TCP_BBR..."
+echo "  Installing TCP_BBR..."
 if [ -n "$(lsmod | grep bbr)" ];then
-echo "TCP_BBR sudah diinstall."
+echo "  TCP_BBR sudah diinstall."
 return 1
 fi
 modprobe tcp_bbr
@@ -26,14 +26,14 @@ Add_To_New_Line "/etc/sysctl.conf" "net.core.default_qdisc = fq"
 Add_To_New_Line "/etc/sysctl.conf" "net.ipv4.tcp_congestion_control = bbr"
 sysctl -p
 if [ -n "$(sysctl net.ipv4.tcp_available_congestion_control | grep bbr)" ] && [ -n "$(sysctl net.ipv4.tcp_congestion_control | grep bbr)" ] && [ -n "$(lsmod | grep "tcp_bbr")" ];then
-	echo "TCP_BBR Install Success."
+	echo "  TCP_BBR Install Success."
 else
-	echo "Gagal menginstall TCP_BBR."
+	echo "  Gagal menginstall TCP_BBR."
 fi
 }
 
 Optimize_Parameters(){
-echo "Optimasi Parameters..."
+echo "  Optimasi Parameters..."
 Check_And_Add_Line "/etc/security/limits.conf" "* soft nofile 51200"
 Check_And_Add_Line "/etc/security/limits.conf" "* hard nofile 51200"
 Check_And_Add_Line "/etc/security/limits.conf" "root soft nofile 51200"
@@ -55,7 +55,7 @@ Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mem = 25600 51200 102400"
 Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_rmem = 4096 87380 67108864"
 Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_wmem = 4096 65536 67108864"
 Check_And_Add_Line "/etc/sysctl.conf" "net.ipv4.tcp_mtu_probing = 1"
-echo "Optimasi Parameters Selesai."
+echo "  Optimasi Parameters Selesai."
 }
 Install_BBR
 Optimize_Parameters

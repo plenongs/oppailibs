@@ -4,7 +4,7 @@ latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases |
 XRAYDL="https://github.com/XTLS/Xray-core/releases/download/v$latest_version/xray-linux-64.zip"
 DOMAIN=`cat /etc/oppailibs/oppai.txt | grep 'DOMAIN ' | sed -e 's/DOMAIN //g'`
 
-echo -e "Downloading and Installing Xray-core"
+echo -e "  Downloading and Installing Xray-core"
 
 cd `mktemp -d`
 curl -sL "$XRAYDL" -o xray.zip
@@ -173,7 +173,7 @@ cat > /etc/xray/config.json << END
 }
 END
 
-echo -e "Configurasi Nginx config and service Xray.."
+echo -e "  Configurasi Nginx config and service Xray.."
 #XRAY NGINX CONFIG
 cat >/etc/nginx/conf.d/xray.conf <<END
 server {
