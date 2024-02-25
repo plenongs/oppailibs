@@ -4,7 +4,6 @@
 
 ### INSTALASI 
 ```
-bash
 # apt update && apt upgrade -y
 # apt install git
 # git clone https://github.com/plenongs/oppailibs.git
