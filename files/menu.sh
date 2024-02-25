@@ -139,10 +139,10 @@ exit
 bash /etc/oppailibs/menu/cr-vmess.sh
 ;;
 2)
-bash /etc/oppailibs/menu/cr-vless.sh
+bash /etc/oppailibs/menu/cr-trojan.sh
 ;;
 3)
-bash /etc/oppailibs/menu/cr-trojan.sh
+bash /etc/oppailibs/menu/cr-vless.sh
 ;;
 4)
 NOOBZVPNS_CREATE
